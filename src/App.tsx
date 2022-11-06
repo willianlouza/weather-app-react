@@ -6,6 +6,7 @@ import capitalizeLetters from './utils/capitalizeLetters';
 import humidityIcon from './assets/humidity.png'
 import windIcon from './assets/wind.png'
 import getDate from './utils/getDate';
+import Background from './components/Background';
 
 const api = import.meta.env.VITE_API;
 const key = import.meta.env.VITE_KEY;
@@ -31,7 +32,7 @@ export default class App extends React.Component<IProps, IState> {
       let query = `${api}q=${params}&units=metric&appid=${key}&lang=pt_br`;
       let result = await (await axios.get(query)).data;
       let date = getDate(result.dt, result.timezone);
-      let isDay = ((parseInt(date.hour) > 18 || parseInt(date.hour) < 6))? false : true;
+      let isDay = ((parseInt(date.hour) > 18 || parseInt(date.hour) < 6)) ? false : true;
       let transformedWeather: ITransformedWeather = {
         city: result.name,
         country: result.sys.country,
@@ -54,26 +55,18 @@ export default class App extends React.Component<IProps, IState> {
   }
   render(): React.ReactNode {
     return (
-      <div className={`h-screen w-screen bg-gradient-to-b flex flex-col place-content-center ${this.state.weather?.isDay ? 'from-sky-400 to-sky-200' : 'from-gray-900 via-sky-900 to-sky-800'}  py-6`}>
-        <SearchBar onSubmit={(params) => { this.updateWeather(params) }} />
-        <div className='container flex mx-auto place-items-center'>
-          <div className='w-full flex flex-col place-items-center'>
-            <h1 className='font-bold'>{this.state.weather?.city}, {this.state.weather?.country}</h1>
-            <h1 className='text-9xl my-5 font-bold'>{this.state.weather?.temp}º</h1>
-            <h3>{this.state.weather?.description}</h3>
-            <img className='w-36 drop-shadow-md' src={this.state.weather?.icon} />
-            <div className='w-full flex justify-evenly my-10'>
-              <div className='flex place-items-center'>
-                <img src={windIcon} className="w-10 h-10 mr-4" />
-                <span>{this.state.weather?.wind}m/s</span>
-              </div>
-              <div className='flex place-items-center'>
-                <img src={humidityIcon} className="w-10 h-10 mr-4" />
-                <span>{this.state.weather?.humidity}%</span>
-              </div>
+      <div className='w-screen min-h-screen flex'>
+        <Background src='' />
+        <div className='flex flex-1 place-items-end justify-center box-border pb-32'>
+          <div className='flex flex-nowrap place-items-center justify-evenly w-full h-36 px-24 md:bg-green-300 sm:bg-red-500'>
+            <h1 className=''>{this.state.weather?.temp}<sup><small>ºc</small></sup></h1>
+            <div className='flex flex-col'>
+              <h1 className='text-7xl'>{this.state.weather?.city}</h1>
             </div>
           </div>
         </div>
+
+        <SearchBar onSubmit={(params) => { this.updateWeather(params) }} />
       </div>
     )
   }
