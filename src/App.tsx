@@ -5,6 +5,7 @@ import ITransformedWeather from './model/ITrasformedWeather';
 import capitalizeLetters from './utils/capitalizeLetters';
 import humidityIcon from './assets/humidity.png'
 import windIcon from './assets/wind.png'
+import getDate from './utils/getDate';
 
 const api = import.meta.env.VITE_API;
 const key = import.meta.env.VITE_KEY;
@@ -29,6 +30,8 @@ export default class App extends React.Component<IProps, IState> {
     try {
       let query = `${api}q=${params}&units=metric&appid=${key}&lang=pt_br`;
       let result = await (await axios.get(query)).data;
+      let date = getDate(result.dt, result.timezone);
+      let isDay = ((parseInt(date.hour) > 18 || parseInt(date.hour) < 6))? false : true;
       let transformedWeather: ITransformedWeather = {
         city: result.name,
         country: result.sys.country,
@@ -37,10 +40,13 @@ export default class App extends React.Component<IProps, IState> {
         humidity: result.main.humidity,
         temp: result.main.temp.toFixed(),
         wind: result.wind.speed,
-        isDay: new Date(result.dt).valueOf() < result.sys.sunset
+        isDay: isDay,
+        date: date
       }
       this.setState({ weather: transformedWeather });
       console.log(transformedWeather)
+      console.log(result)
+      console.log(transformedWeather.date)
     } catch (err) {
       console.log(err)
     }

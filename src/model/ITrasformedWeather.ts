@@ -6,5 +6,6 @@ export default interface ITransformedWeather{
   temp: string;
   humidity: number;
   wind: number;
+  date: any;
   isDay: boolean;
 }
