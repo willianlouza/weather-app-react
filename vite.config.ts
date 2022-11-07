@@ -7,6 +7,7 @@ export default ({mode}) => {
   dotenv.config()
   return defineConfig({
     plugins: [react()],
+    base: "/weather-app-react/"
   })
 }
 
