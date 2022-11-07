@@ -21,11 +21,11 @@ jobs:
         npm run-script build
       env:
         VITE_API: ${{ secrets.VITE_API }}
-        VITE_KEY: ${{ secrets.VITE_KEY }}
+        VITE_KEY: ${{ secrets.VITE_KEY}}
 
-    - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@v4.4.1
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
-        FOLDER: dist
+        FOLDER: build
