@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 :root {
-  font-family: Poppins, Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Poppins', Helvetica, Arial, sans-serif;
   line-height: 24px;
   font-weight: 400;
   color: white;
@@ -12,9 +12,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-}
-h1{
-  font-size: 10rem;
 }
 a {
   font-weight: 500;
@@ -34,15 +31,14 @@ body {
 button {
   box-sizing: border-box;
   padding: 0.6em 1.2em;
-  background-color: rgba(255,255,255,0.1);
   cursor: pointer;
 }
 button:hover {
-  background-color: rgba(255,255,255,0.3);
+  background-color: rgba(255,255,255,0.5);
 }
 button:focus,
 button:focus-visible {
-  background-color: rgba(255,255,255,0.3);
+  background-color: rgba(255,255,255,0.5);
 }
 input::placeholder{
   color: white;

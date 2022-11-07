@@ -1,3 +1,4 @@
+import { DateFormat } from './../utils/getDate';
 export default interface ITransformedWeather{
   city: string;
   country: string;
@@ -6,6 +7,6 @@ export default interface ITransformedWeather{
   temp: string;
   humidity: number;
   wind: number;
-  date: any;
+  date: DateFormat;
   isDay: boolean;
 }
